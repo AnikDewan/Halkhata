@@ -1,0 +1,29 @@
+@import 'tailwindcss';
+@import 'uniwind';
+
+@layer theme {
+  :root {
+    @variant light {
+      --color-background: #f9fafb;
+      --color-foreground: #111827;
+      --color-foreground-secondary: #4b5563;
+      --color-card: #ffffff;
+      --color-border: #e5e7eb;
+      --color-muted: #6b7280;
+      --color-primary: #ee161f;
+      --color-danger: #ee161f;
+      --color-success: #10b981;
+    }
+    @variant dark {
+      --color-background: #050708;   /* near true-black, deeper than before */
+      --color-foreground: #f4f5f7;   /* slightly off-white, not stark #fff — easier on eyes at this darkness */
+      --color-foreground-secondary: #a8b0bb;
+      --color-card: #131619;         /* clearly lifted off background */
+      --color-border: #262b31;
+      --color-muted: #757e88;
+      --color-primary: #ee161f;      /* unchanged, your brand color */
+      --color-danger: #ee161f;       /* unchanged */
+      --color-success: #17c990;      /* brightened slightly — original #10b981 reads muddy this dark */
+    }
+  }
+}
