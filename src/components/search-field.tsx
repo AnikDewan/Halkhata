@@ -17,7 +17,9 @@ export function SearchField({
 
   return (
     <View className="flex-row items-center bg-card border border-border px-3 rounded-2xl h-12 shadow-xs">
-      <Search size={18} color={c.primary} className="mr-2" />
+      <View className="mr-2">
+        <Search size={18} color={c.primary} />
+      </View>
       <TextInput
         placeholder={placeholder}
         placeholderTextColorClassName="accent-muted"
