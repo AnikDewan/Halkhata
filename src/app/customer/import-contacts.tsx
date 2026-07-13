@@ -159,7 +159,7 @@ export default function ImportContactsScreen() {
           <Text className="text-foreground font-bold text-sm mt-3 text-center">
             No matching contacts
           </Text>
-          <Text className="text-muted text-xs font-semibold mt-1.5 text-center max-w-[240px]">
+          <Text className="text-muted text-xs font-semibold mt-1.5 text-center max-w-60">
             {searchQuery
               ? "Try a different search term."
               : "No contacts with a name and phone number were found."}

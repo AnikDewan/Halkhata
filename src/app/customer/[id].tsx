@@ -243,7 +243,7 @@ export default function CustomerDetailsScreen() {
                 className="text-muted text-xxs mt-0.5 font-semibold"
                 numberOfLines={1}
               >
-                 send a PDF reminder
+                send a PDF reminder
               </Text>
             </View>
             <Pressable
@@ -272,7 +272,7 @@ export default function CustomerDetailsScreen() {
               No ledger logs yet
             </Text>
             <Text className="text-muted text-xs text-center mt-1">
-               Tap the + button below to add given or received entries.
+              Tap the + button below to add given or received entries.
             </Text>
           </Animated.View>
         ) : (
@@ -315,14 +315,10 @@ export default function CustomerDetailsScreen() {
                       )}
                     </View>
 
-                    <View className="items-end flex-row items-center gap-3.5 py-3 px-4">
+                    <View className="flex-row items-center gap-3.5 py-3 px-4">
                       <View className="flex-row items-center gap-1.5">
                         {item.type === "given" ? (
-                          <ArrowUp
-                            size={14}
-                            color={c.danger}
-                            strokeWidth={3}
-                          />
+                          <ArrowUp size={14} color={c.danger} strokeWidth={3} />
                         ) : (
                           <ArrowDown
                             size={14}

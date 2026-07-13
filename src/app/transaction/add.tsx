@@ -1,7 +1,7 @@
+import { useAppAlert } from "@/components/app-alert";
 import { AppHeader } from "@/components/app-header";
 import { FormField } from "@/components/form-field";
 import { SearchField } from "@/components/search-field";
-import { useAppAlert } from "@/components/app-alert";
 import { db } from "@/db/db";
 import { customers, transactions } from "@/db/schema";
 import { cn } from "@/lib/cn";
@@ -103,11 +103,7 @@ export default function AddTransactionScreen() {
   if (!customerId || !customer) {
     return (
       <View className="flex-1 bg-background">
-        <AppHeader
-          title="Add Entry"
-          subtitle="Choose a customer first"
-          back
-        />
+        <AppHeader title="Add Entry" subtitle="Choose a customer first" back />
 
         <View className="px-4 pt-4 mb-3">
           <SearchField
@@ -177,11 +173,7 @@ export default function AddTransactionScreen() {
 
   return (
     <View className="flex-1 bg-background">
-      <AppHeader
-        title="Add Entry"
-        subtitle={customer.name}
-        back
-      />
+      <AppHeader title="Add Entry" subtitle={customer.name} back />
 
       <ScrollView
         className="flex-1"

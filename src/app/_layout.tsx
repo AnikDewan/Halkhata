@@ -1,4 +1,5 @@
 import { AppAlertProvider } from "@/components/app-alert";
+import { db } from "@/db/db";
 import { ensureDailyBackup } from "@/lib/backup";
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
 import { Stack } from "expo-router";
@@ -12,7 +13,6 @@ import {
 import { Uniwind } from "uniwind";
 import migrations from "../../drizzle/migrations";
 import "../../global.css";
-import { db } from "../db/db";
 
 export default function RootLayout() {
   const { success, error } = useMigrations(db, migrations);

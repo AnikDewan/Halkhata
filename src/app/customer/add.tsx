@@ -80,7 +80,7 @@ export default function AddCustomerScreen() {
             </Text>
           </Pressable>
 
-          <View className="h-[1px] bg-border my-2" />
+          <View className="h-px bg-border my-2" />
 
           <Pressable
             onPress={() => router.push("/customer/import-contacts")}

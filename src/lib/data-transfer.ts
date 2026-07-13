@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
 import { db } from "@/db/db";
 import { customers, transactions } from "@/db/schema";
+import { eq } from "drizzle-orm";
 
 type CustomerExport = typeof customers.$inferSelect;
 type TransactionExport = typeof transactions.$inferSelect;
@@ -14,7 +14,10 @@ export type LedgerExport = {
 };
 
 export async function buildLedgerExport(): Promise<LedgerExport> {
-  const customerRows = await db.select().from(customers).orderBy(customers.name);
+  const customerRows = await db
+    .select()
+    .from(customers)
+    .orderBy(customers.name);
   const transactionRows = await db
     .select()
     .from(transactions)
@@ -74,7 +77,9 @@ export async function importLedgerJson(rawJson: string) {
     }
 
     const validCustomerIds = new Set(
-      parsed.customers.map((c) => Number(c.id)).filter((id) => Number.isFinite(id)),
+      parsed.customers
+        .map((c) => Number(c.id))
+        .filter((id) => Number.isFinite(id)),
     );
     for (const entry of parsed.transactions) {
       const customerId = Number(entry.customerId);
@@ -105,7 +110,9 @@ export async function importLedgerJson(rawJson: string) {
 
 export async function deleteCustomer(customerId: number) {
   await db.transaction(async (tx) => {
-    await tx.delete(transactions).where(eq(transactions.customerId, customerId));
+    await tx
+      .delete(transactions)
+      .where(eq(transactions.customerId, customerId));
     await tx.delete(customers).where(eq(customers.id, customerId));
   });
 }

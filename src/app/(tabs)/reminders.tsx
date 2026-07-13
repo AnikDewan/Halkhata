@@ -1,19 +1,19 @@
+import { useAppAlert } from "@/components/app-alert";
 import { AppHeader } from "@/components/app-header";
 import { db } from "@/db/db";
 import { customers, transactions } from "@/db/schema";
 import { formatMoney } from "@/lib/format";
 import { shareReminderPdf } from "@/lib/pdf";
+import { useThemeColors, WHITE } from "@/lib/theme";
 import { FlashList } from "@shopify/flash-list";
 import { sql } from "drizzle-orm";
 import { useLiveQuery } from "drizzle-orm/expo-sqlite";
 import { AlertCircle, CheckCircle2, Share2 } from "lucide-react-native";
-import { useAppAlert } from "@/components/app-alert";
 import { Pressable, Text, View } from "react-native";
 import Animated, {
   FadeInDown,
   LinearTransition,
 } from "react-native-reanimated";
-import { useThemeColors, WHITE } from "@/lib/theme";
 
 export default function RemindersScreen() {
   const c = useThemeColors();
@@ -54,8 +54,12 @@ export default function RemindersScreen() {
     phone: string | null,
     balance: number,
   ) => {
-    shareReminderPdf({ customerName: name, customerPhone: phone, balance }).catch(
-      (e: any) => alert("Error", "Could not generate reminder PDF: " + e.message),
+    shareReminderPdf({
+      customerName: name,
+      customerPhone: phone,
+      balance,
+    }).catch((e: any) =>
+      alert("Error", "Could not generate reminder PDF: " + e.message),
     );
   };
 

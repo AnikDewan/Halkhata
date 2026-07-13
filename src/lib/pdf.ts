@@ -1,6 +1,6 @@
+import { formatMoney } from "@/lib/format";
 import * as Print from "expo-print";
 import * as Sharing from "expo-sharing";
-import { formatMoney } from "@/lib/format";
 
 const PRIMARY = "#ee161f";
 
@@ -37,7 +37,9 @@ function buildInvoiceHtml(data: InvoiceData): string {
   const rows = data.items.map(invoiceItemRow).join("");
   const customerMeta = data.customerName
     ? `<p class="cust">Billed To: <strong>${escapeHtml(data.customerName)}</strong>${
-        data.customerPhone ? ` <span class="muted">(${escapeHtml(data.customerPhone)})</span>` : ""
+        data.customerPhone
+          ? ` <span class="muted">(${escapeHtml(data.customerPhone)})</span>`
+          : ""
       }</p>`
     : "";
 

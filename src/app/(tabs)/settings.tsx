@@ -411,7 +411,9 @@ export default function SettingsScreen() {
 
           <View className="items-center pb-4 gap-1">
             <Text className="text-primary font-bold text-sm">HalKhata</Text>
-            <Text className="text-muted text-xs font-medium">Version 1.0.0</Text>
+            <Text className="text-muted text-xs font-medium">
+              Version 1.0.0
+            </Text>
           </View>
         </Animated.View>
       </ScrollView>

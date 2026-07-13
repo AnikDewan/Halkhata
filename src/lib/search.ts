@@ -48,7 +48,7 @@ const bengaliToLatin: Record<string, string> = {
   ড়: "r",
   ঢ়: "rh",
   য়: "y",
-  "ৎ": "t",
+  ৎ: "t",
   "ং": "ng",
   "ঃ": "",
   "ঁ": "",
@@ -204,10 +204,7 @@ function phoneticKey(value: string): string {
     .replace(/ee/g, "i")
     .replace(/oo/g, "u");
 
-  s = s
-    .replace(/[ao]/g, "a")
-    .replace(/[eiy]/g, "i")
-    .replace(/[uw]/g, "u");
+  s = s.replace(/[ao]/g, "a").replace(/[eiy]/g, "i").replace(/[uw]/g, "u");
 
   s = s.replace(/[zfvq]/g, (char) => {
     if (char === "z") return "j";

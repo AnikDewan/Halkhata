@@ -25,10 +25,7 @@
         "android.permission.INTERNET"
       ]
     },
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "platforms": ["ios", "android"],
     "plugins": [
       "expo-router",
       [

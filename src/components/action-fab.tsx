@@ -1,6 +1,6 @@
+import { Plus } from "lucide-react-native";
 import { ReactNode } from "react";
 import { Pressable, Text, View } from "react-native";
-import { Plus } from "lucide-react-native";
 import Animated, { FadeInDown, FadeOut } from "react-native-reanimated";
 
 export type FabAction = {

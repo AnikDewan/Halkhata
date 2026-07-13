@@ -1,3 +1,10 @@
+import {
+  buildLedgerExport,
+  importLedgerJson,
+  type LedgerExport,
+} from "@/lib/data-transfer";
+import { formatDate } from "@/lib/format";
+import * as DocumentPicker from "expo-document-picker";
 import { Directory, File, Paths } from "expo-file-system";
 import {
   EncodingType,
@@ -6,16 +13,9 @@ import {
   readAsStringAsync,
   writeAsStringAsync,
 } from "expo-file-system/legacy";
-import * as DocumentPicker from "expo-document-picker";
 import * as Sharing from "expo-sharing";
 import { strFromU8, strToU8, unzipSync, zipSync } from "fflate";
 import { Platform } from "react-native";
-import {
-  buildLedgerExport,
-  importLedgerJson,
-  type LedgerExport,
-} from "@/lib/data-transfer";
-import { formatDate } from "@/lib/format";
 
 /** Subfolder created inside the user-picked location (survives uninstall). */
 const DURABLE_SUBDIR = "HalKhataBackups";
@@ -154,8 +154,7 @@ function basenameFromUri(uri: string): string {
   const decoded = decodeURIComponent(uri);
   // SAF document URIs often end with ".../document/primary:Folder/file.ext"
   const primaryIdx = decoded.lastIndexOf(":");
-  const tail =
-    primaryIdx >= 0 ? decoded.slice(primaryIdx + 1) : decoded;
+  const tail = primaryIdx >= 0 ? decoded.slice(primaryIdx + 1) : decoded;
   const parts = tail.split("/").filter(Boolean);
   return parts[parts.length - 1] ?? uri;
 }
@@ -188,9 +187,9 @@ function isManifestFileName(name: string): boolean {
   return isSameLogicalName(name, MANIFEST_NAME);
 }
 
-async function listDurableFileUris(dirUri: string): Promise<
-  { name: string; uri: string }[]
-> {
+async function listDurableFileUris(
+  dirUri: string,
+): Promise<{ name: string; uri: string }[]> {
   if (isSafUri(dirUri)) {
     const uris = await StorageAccessFramework.readDirectoryAsync(dirUri);
     return uris.map((uri) => ({ name: basenameFromUri(uri), uri }));
@@ -251,31 +250,31 @@ async function deleteAllManifests(dirUri: string): Promise<void> {
  * Keep only the listed backup zips + a single fresh manifest.
  * Removes old manifests, duplicate SAF names, and orphaned zips.
  */
-async function cleanupDurableFolder(
-  dirUri: string,
-  keepZipNames: Set<string>,
-): Promise<void> {
-  const files = await listDurableFileUris(dirUri);
-  for (const f of files) {
-    if (isManifestFileName(f.name)) {
-      // Manifests are rewritten after cleanup; drop every copy first.
-      await deleteDurableUri(dirUri, f.uri);
-      continue;
-    }
-    const isKeptZip = [...keepZipNames].some((keep) =>
-      isSameLogicalName(f.name, keep),
-    );
-    if (isKeptZip) continue;
+// async function cleanupDurableFolder(
+//   dirUri: string,
+//   keepZipNames: Set<string>,
+// ): Promise<void> {
+//   const files = await listDurableFileUris(dirUri);
+//   for (const f of files) {
+//     if (isManifestFileName(f.name)) {
+//       // Manifests are rewritten after cleanup; drop every copy first.
+//       await deleteDurableUri(dirUri, f.uri);
+//       continue;
+//     }
+//     const isKeptZip = [...keepZipNames].some((keep) =>
+//       isSameLogicalName(f.name, keep),
+//     );
+//     if (isKeptZip) continue;
 
-    // Drop orphan zips and any leftover junk files we own.
-    if (
-      f.name.toLowerCase().endsWith(".zip") ||
-      f.name.toLowerCase().endsWith(".json")
-    ) {
-      await deleteDurableUri(dirUri, f.uri);
-    }
-  }
-}
+//     // Drop orphan zips and any leftover junk files we own.
+//     if (
+//       f.name.toLowerCase().endsWith(".zip") ||
+//       f.name.toLowerCase().endsWith(".json")
+//     ) {
+//       await deleteDurableUri(dirUri, f.uri);
+//     }
+//   }
+// }
 
 async function writeDurableBytes(
   dirUri: string,
@@ -452,7 +451,11 @@ async function saveManifest(manifest: BackupManifest): Promise<void> {
       "No uninstall-safe backup folder linked. Choose a folder in Tools first.",
     );
   }
-  await writeDurableText(dirUri, MANIFEST_NAME, JSON.stringify(manifest, null, 2));
+  await writeDurableText(
+    dirUri,
+    MANIFEST_NAME,
+    JSON.stringify(manifest, null, 2),
+  );
 }
 
 /**
@@ -528,9 +531,7 @@ async function resetBackupsAfterReplace(
     await deleteDurableNamed(dirUri, entry.fileName);
   }
 
-  const kept = safetyEntry
-    ? [safetyEntry]
-    : [];
+  const kept = safetyEntry ? [safetyEntry] : [];
 
   // Fresh daily of current (restored/imported) data as the new baseline.
   const data = await buildLedgerExport();

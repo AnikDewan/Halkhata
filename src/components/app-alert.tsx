@@ -1,7 +1,7 @@
+import { cn } from "@/lib/cn";
 import { createContext, useContext, useState, type ReactNode } from "react";
 import { Modal, Pressable, Text, View } from "react-native";
 import Animated, { ZoomIn, ZoomOut } from "react-native-reanimated";
-import { cn } from "@/lib/cn";
 
 export type AppAlertButton = {
   text: string;
@@ -41,9 +41,7 @@ export function AppAlertProvider({ children }: { children: ReactNode }) {
     setConfig({
       title,
       message,
-      buttons: buttons?.length
-        ? buttons
-        : [{ text: "OK", style: "default" }],
+      buttons: buttons?.length ? buttons : [{ text: "OK", style: "default" }],
     });
   };
 
@@ -57,7 +55,9 @@ export function AppAlertProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const buttons = config?.buttons ?? [{ text: "OK", style: "default" as const }];
+  const buttons = config?.buttons ?? [
+    { text: "OK", style: "default" as const },
+  ];
   const isStacked = buttons.length > 2;
 
   return (

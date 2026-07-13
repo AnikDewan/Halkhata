@@ -1,4 +1,4 @@
-import { useCSSVariable } from 'uniwind';
+import { useCSSVariable } from "uniwind";
 
 /**
  * Resolved brand/theme colors for icon strokes and other non-style color props.
@@ -11,23 +11,23 @@ import { useCSSVariable } from 'uniwind';
  */
 export function useThemeColors() {
   const v = useCSSVariable([
-    '--color-primary',
-    '--color-danger',
-    '--color-success',
-    '--color-foreground',
-    '--color-foreground-secondary',
-    '--color-muted',
+    "--color-primary",
+    "--color-danger",
+    "--color-success",
+    "--color-foreground",
+    "--color-foreground-secondary",
+    "--color-muted",
   ]) as (string | undefined)[];
 
   return {
-    primary: v[0] ?? '#ee161f',
-    danger: v[1] ?? '#ee161f',
-    success: v[2] ?? '#10b981',
-    foreground: v[3] ?? '#111827',
-    foregroundSecondary: v[4] ?? '#4b5563',
-    muted: v[5] ?? '#6b7280',
+    primary: v[0] ?? "#ee161f",
+    danger: v[1] ?? "#ee161f",
+    success: v[2] ?? "#10b981",
+    foreground: v[3] ?? "#111827",
+    foregroundSecondary: v[4] ?? "#4b5563",
+    muted: v[5] ?? "#6b7280",
   };
 }
 
 /** White for icons that sit on a saturated colored tile (red/green) in any theme. */
-export const WHITE = '#ffffff';
+export const WHITE = "#ffffff";

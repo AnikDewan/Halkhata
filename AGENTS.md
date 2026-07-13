@@ -1,18 +1,21 @@
 # HalKhata
 
 ## What this project is
+
 Offline-first digital khata (ledger) app for small business owners. Tracks which
 customers owe money (credit given) and which payments were received, sends
 payment reminders, and generates itemized bills. "KhataBook clone." Expo SDK 57,
 React Native 0.86, React 19.
 
 ## Brand
+
 - Primary color `#ee161f` (red) — headers, primary CTAs, active tab, FABs. No blue
   as a primary accent.
 - Received money = green; pending/credit = brand red.
 - Card-based, rounded, gray-50 background, minimal chrome.
 
 ## Commands
+
 - Dev server: `npm start` (or `npx expo start`); platforms: `npm run android|ios|web`.
 - Lint: `npm run lint` (= `expo lint`).
 - Typecheck: `npx tsc --noEmit` (no npm script — strict mode is on).
@@ -23,6 +26,7 @@ React Native 0.86, React 19.
 - No test runner is configured — do not assume Jest exists.
 
 ## Project structure & gotchas
+
 - Routes live in `src/app/`, NOT `app/`. (The README's "edit files inside the `app/`
   directory" is stale — the real entry is `src/app/`.)
 - Path alias `@/*` → `src/*` (tsconfig). Use it for all imports.
@@ -36,6 +40,7 @@ React Native 0.86, React 19.
   connection (already set in `src/db/db.ts`). Keep it.
 
 ## Tech stack (do not deviate without discussion)
+
 - Expo Router (file-based routing, `src/app/`), Expo SQLite + Drizzle ORM.
 - No external/global state (Redux/Zustand/Context) for ledger data — reactivity comes
   from Drizzle live queries only.
@@ -47,6 +52,7 @@ React Native 0.86, React 19.
   interfaces.
 
 ## Data & money handling
+
 - A customer's balance is always derived from (sum credit − sum payment) transactions.
   Never let balance drift; writes must be atomic/transactional.
 - Positive balance = business will receive money; negative = business owes customer.
@@ -57,6 +63,7 @@ React Native 0.86, React 19.
   confirmation dialog.
 
 ## Feature checklist (source of truth)
+
 - [ ] Customers: add (manual + phone contacts), search, view, delete (cascade + confirm)
 - [ ] Transactions: add credit/payment per customer, delete (reverse + confirm), global feed
 - [ ] Home dashboard: receivable/payable/net, recent transactions
@@ -65,5 +72,6 @@ React Native 0.86, React 19.
 - [ ] Settings: data export/import, theme, destructive clear-all-data (confirmed), version
 
 ## Expo version note
+
 Expo changes fast between SDKs. Before writing framework code, read the versioned docs
 at https://docs.expo.dev/versions/v57.0.0/.

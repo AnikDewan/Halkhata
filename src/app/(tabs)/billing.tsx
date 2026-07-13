@@ -1,31 +1,26 @@
+import { useAppAlert } from "@/components/app-alert";
 import { AppHeader } from "@/components/app-header";
 import { FormField } from "@/components/form-field";
 import { SearchField } from "@/components/search-field";
-import { useAppAlert } from "@/components/app-alert";
 import { db } from "@/db/db";
 import { customers, transactions } from "@/db/schema";
 import { cn } from "@/lib/cn";
 import { formatMoney, parseRupees } from "@/lib/format";
 import { shareInvoicePdf } from "@/lib/pdf";
 import { matchesSearch } from "@/lib/search";
+import { useThemeColors, WHITE } from "@/lib/theme";
 import { FlashList } from "@shopify/flash-list";
 import { eq } from "drizzle-orm";
 import { useLiveQuery } from "drizzle-orm/expo-sqlite";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ChevronRight, Receipt, Share2, Trash2, X } from "lucide-react-native";
 import { useState } from "react";
-import {
-  Modal,
-  Pressable,
-  Text,
-  View,
-} from "react-native";
+import { Modal, Pressable, Text, View } from "react-native";
 import Animated, {
   FadeInDown,
   FadeOut,
   LinearTransition,
 } from "react-native-reanimated";
-import { useThemeColors, WHITE } from "@/lib/theme";
 
 interface InvoiceItem {
   id: string;
@@ -382,7 +377,7 @@ export default function BillingScreen() {
             </Text>
             <Text className="text-muted text-xs mt-1 font-semibold leading-relaxed">
               Select which customer will be charged the total bill amount of{" "}
-               {formatMoney(totalAmount)} as a given entry.
+              {formatMoney(totalAmount)} as a given entry.
             </Text>
           </View>
 

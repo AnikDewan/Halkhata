@@ -1,6 +1,6 @@
+import { useThemeColors } from "@/lib/theme";
 import { Search, XCircle } from "lucide-react-native";
 import { Pressable, TextInput, View } from "react-native";
-import { useThemeColors } from "@/lib/theme";
 
 type SearchFieldProps = {
   value: string;

@@ -1,5 +1,9 @@
 import { ActionFab } from "@/components/action-fab";
 import { AppHeader } from "@/components/app-header";
+import { db } from "@/db/db";
+import { customers, transactions } from "@/db/schema";
+import { cn } from "@/lib/cn";
+import { formatDate, formatMoney } from "@/lib/format";
 import { useThemeColors, WHITE } from "@/lib/theme";
 import { FlashList } from "@shopify/flash-list";
 import { sql } from "drizzle-orm";
@@ -11,10 +15,6 @@ import Animated, {
   FadeInDown,
   LinearTransition,
 } from "react-native-reanimated";
-import { db } from "../../db/db";
-import { customers, transactions } from "../../db/schema";
-import { cn } from "../../lib/cn";
-import { formatDate, formatMoney } from "../../lib/format";
 
 export default function HomeDashboard() {
   const router = useRouter();
@@ -160,7 +160,7 @@ export default function HomeDashboard() {
               <Text className="text-foreground font-bold text-base">
                 No entries recorded
               </Text>
-              <Text className="text-muted text-xs text-center mt-1.5 max-w-[240px]">
+              <Text className="text-muted text-xs text-center mt-1.5 max-w-60">
                 Tap + to add a customer and record your first ledger
                 transaction.
               </Text>
