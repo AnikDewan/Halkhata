@@ -25,7 +25,6 @@ import {
 } from "react-native";
 import Animated, {
   FadeInDown,
-  LinearTransition,
 } from "react-native-reanimated";
 import { db } from "../../db/db";
 import { customers, transactions } from "../../db/schema";
@@ -280,18 +279,14 @@ export default function CustomerDetailsScreen() {
             <FlashList
               data={txList}
               keyExtractor={(item) => String(item.id)}
-              renderItem={({ item, index }) => (
-                <Animated.View
-                  entering={FadeInDown.duration(350).delay(index * 20)}
-                  layout={LinearTransition.springify()}
+              renderItem={({ item }) => (
+                <Pressable
+                  onLongPress={() =>
+                    handleDeleteTransaction(item.id, item.amount, item.type)
+                  }
+                  className="flex-row justify-between items-center bg-card border border-border rounded-2xl mb-2.5 overflow-hidden active:bg-border shadow-xs"
+                  style={{ borderCurve: "continuous" }}
                 >
-                  <Pressable
-                    onLongPress={() =>
-                      handleDeleteTransaction(item.id, item.amount, item.type)
-                    }
-                    className="flex-row justify-between items-center bg-card border border-border rounded-2xl mb-2.5 overflow-hidden active:bg-border shadow-xs"
-                    style={{ borderCurve: "continuous" }}
-                  >
                     <View
                       className={cn(
                         "w-1.5 h-16",
@@ -350,8 +345,7 @@ export default function CustomerDetailsScreen() {
                         <Trash2 size={13} color={c.danger} />
                       </Pressable>
                     </View>
-                  </Pressable>
-                </Animated.View>
+                </Pressable>
               )}
             />
           </View>

@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `customers_name_unique` ON `customers` (lower(trim("name")));

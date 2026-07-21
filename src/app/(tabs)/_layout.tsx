@@ -5,6 +5,9 @@ import { useCSSVariable, useResolveClassNames } from "uniwind";
 export default function TabsLayout() {
   const primaryColor = useCSSVariable("--color-primary") as string;
   const mutedColor = useCSSVariable("--color-muted") as string;
+  const backgroundColor = useCSSVariable("--color-background") as string;
+  const cardColor = useCSSVariable("--color-card") as string;
+  const borderColor = useCSSVariable("--color-border") as string;
 
   const tabBarClassName = "bg-card py-5 h-18";
   const tabBarStyle = useResolveClassNames(tabBarClassName);
@@ -14,7 +17,16 @@ export default function TabsLayout() {
       screenOptions={{
         tabBarActiveTintColor: primaryColor || "#ee161f",
         tabBarInactiveTintColor: mutedColor || "#9ca3af",
-        tabBarStyle: tabBarStyle,
+        // Keep the navigator itself painted while React Navigation swaps scenes.
+        // Without this, its default white surface can briefly show in dark mode.
+        sceneStyle: { backgroundColor: backgroundColor || "#f9fafb" },
+        tabBarStyle: [
+          tabBarStyle,
+          {
+            backgroundColor: cardColor || "#ffffff",
+            borderTopColor: borderColor || "#e5e7eb",
+          },
+        ],
         tabBarLabelStyle: {
           fontSize: 11,
           fontWeight: "600",

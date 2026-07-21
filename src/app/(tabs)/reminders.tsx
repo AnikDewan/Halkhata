@@ -10,10 +10,7 @@ import { sql } from "drizzle-orm";
 import { useLiveQuery } from "drizzle-orm/expo-sqlite";
 import { AlertCircle, CheckCircle2, Share2 } from "lucide-react-native";
 import { Pressable, Text, View } from "react-native";
-import Animated, {
-  FadeInDown,
-  LinearTransition,
-} from "react-native-reanimated";
+import Animated, { FadeInDown } from "react-native-reanimated";
 
 export default function RemindersScreen() {
   const c = useThemeColors();
@@ -99,15 +96,11 @@ export default function RemindersScreen() {
           <FlashList
             data={pendingCustomers}
             keyExtractor={(item) => String(item.id)}
-            renderItem={({ item, index }) => (
-              <Animated.View
-                entering={FadeInDown.duration(350).delay(index * 20)}
-                layout={LinearTransition.springify()}
+            renderItem={({ item }) => (
+              <View
+                className="flex-row justify-between items-center bg-card border border-border p-4 rounded-2xl mb-2.5 shadow-xs"
+                style={{ borderCurve: "continuous" }}
               >
-                <View
-                  className="flex-row justify-between items-center bg-card border border-border p-4 rounded-2xl mb-2.5 shadow-xs"
-                  style={{ borderCurve: "continuous" }}
-                >
                   <View className="flex-1 pr-2">
                     <Text className="text-foreground font-bold text-sm">
                       {item.name}
@@ -140,8 +133,7 @@ export default function RemindersScreen() {
                       <Share2 size={16} color={WHITE} strokeWidth={2.2} />
                     </Pressable>
                   </View>
-                </View>
-              </Animated.View>
+              </View>
             )}
           />
         </View>

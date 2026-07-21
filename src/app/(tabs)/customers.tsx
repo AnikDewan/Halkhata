@@ -14,11 +14,7 @@ import { useRouter } from "expo-router";
 import { Users } from "lucide-react-native";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
-import Animated, {
-  FadeIn,
-  FadeInDown,
-  LinearTransition,
-} from "react-native-reanimated";
+import Animated, { FadeIn } from "react-native-reanimated";
 
 export default function CustomersScreen() {
   const router = useRouter();
@@ -96,18 +92,14 @@ export default function CustomersScreen() {
             <FlashList
               data={filteredCustomers}
               keyExtractor={(item) => String(item.id)}
-              renderItem={({ item, index }) => {
+              renderItem={({ item }) => {
                 const balance = item.totalGiven - item.totalReceived;
                 return (
-                  <Animated.View
-                    entering={FadeInDown.duration(350).delay(index * 30)}
-                    layout={LinearTransition.springify()}
+                  <Pressable
+                    onPress={() => router.push(`/customer/${item.id}` as any)}
+                    className="flex-row justify-between items-center bg-card border border-border rounded-2xl mb-2.5 overflow-hidden active:bg-border shadow-xs"
+                    style={{ borderCurve: "continuous" }}
                   >
-                    <Pressable
-                      onPress={() => router.push(`/customer/${item.id}` as any)}
-                      className="flex-row justify-between items-center bg-card border border-border rounded-2xl mb-2.5 overflow-hidden active:bg-border shadow-xs"
-                      style={{ borderCurve: "continuous" }}
-                    >
                       <View
                         className={cn(
                           "w-1.5 h-16",
@@ -161,8 +153,7 @@ export default function CustomersScreen() {
                           </>
                         )}
                       </View>
-                    </Pressable>
-                  </Animated.View>
+                  </Pressable>
                 );
               }}
             />

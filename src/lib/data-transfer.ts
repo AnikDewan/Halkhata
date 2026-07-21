@@ -1,5 +1,6 @@
 import { db } from "@/db/db";
 import { customers, transactions } from "@/db/schema";
+import { isDuplicateCustomerNameError } from "@/lib/customer-name";
 import { eq } from "drizzle-orm";
 
 type CustomerExport = typeof customers.$inferSelect;
@@ -59,48 +60,55 @@ export async function importLedgerJson(rawJson: string) {
   let importedCustomers = 0;
   let importedTransactions = 0;
 
-  await db.transaction(async (tx) => {
-    await tx.delete(transactions);
-    await tx.delete(customers);
+  try {
+    await db.transaction(async (tx) => {
+      await tx.delete(transactions);
+      await tx.delete(customers);
 
-    for (const customer of parsed.customers) {
-      const name = String(customer.name ?? "").trim();
-      if (!name) continue;
+      for (const customer of parsed.customers) {
+        const name = String(customer.name ?? "").trim();
+        if (!name) continue;
 
-      await tx.insert(customers).values({
-        id: Number(customer.id),
-        name,
-        phone: customer.phone ? String(customer.phone) : null,
-        createdAt: Number(customer.createdAt) || Date.now(),
-      });
-      importedCustomers += 1;
-    }
-
-    const validCustomerIds = new Set(
-      parsed.customers
-        .map((c) => Number(c.id))
-        .filter((id) => Number.isFinite(id)),
-    );
-    for (const entry of parsed.transactions) {
-      const customerId = Number(entry.customerId);
-      if (!validCustomerIds.has(customerId)) {
-        continue;
+        await tx.insert(customers).values({
+          id: Number(customer.id),
+          name,
+          phone: customer.phone ? String(customer.phone) : null,
+          createdAt: Number(customer.createdAt) || Date.now(),
+        });
+        importedCustomers += 1;
       }
 
-      const amount = Number(entry.amount) || 0;
-      if (amount <= 0) continue;
+      const validCustomerIds = new Set(
+        parsed.customers
+          .map((c) => Number(c.id))
+          .filter((id) => Number.isFinite(id)),
+      );
+      for (const entry of parsed.transactions) {
+        const customerId = Number(entry.customerId);
+        if (!validCustomerIds.has(customerId)) {
+          continue;
+        }
 
-      await tx.insert(transactions).values({
-        id: Number(entry.id),
-        customerId,
-        type: entry.type === "received" ? "received" : "given",
-        amount,
-        description: entry.description ? String(entry.description) : null,
-        createdAt: Number(entry.createdAt) || Date.now(),
-      });
-      importedTransactions += 1;
+        const amount = Number(entry.amount) || 0;
+        if (amount <= 0) continue;
+
+        await tx.insert(transactions).values({
+          id: Number(entry.id),
+          customerId,
+          type: entry.type === "received" ? "received" : "given",
+          amount,
+          description: entry.description ? String(entry.description) : null,
+          createdAt: Number(entry.createdAt) || Date.now(),
+        });
+        importedTransactions += 1;
+      }
+    });
+  } catch (error) {
+    if (isDuplicateCustomerNameError(error)) {
+      throw new Error("The backup contains duplicate customer names.");
     }
-  });
+    throw error;
+  }
 
   return {
     customerCount: importedCustomers,

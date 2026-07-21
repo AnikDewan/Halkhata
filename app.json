@@ -21,18 +21,32 @@
       "permissions": [
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.INTERNET",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.INTERNET"
       ]
     },
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
+          "backgroundColor": "#EE161F",
           "image": "./assets/images/splash-icon.png",
-          "imageWidth": 76
+          "imageWidth": 200,
+          "ios": {
+            "backgroundColor": "#EE161F",
+            "resizeMode": "contain"
+          },
+          "android": {
+            "backgroundColor": "#EE161F",
+            "resizeMode": "contain"
+          }
         }
       ],
       "expo-sqlite",
@@ -44,7 +58,10 @@
           "enableFileSharing": true
         }
       ],
-      "expo-document-picker"
+      "expo-document-picker",
+      "expo-image",
+      "expo-status-bar",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
@@ -56,6 +73,12 @@
         "projectId": "3d7ae686-6a2f-42cc-b075-bf925ec7e0be"
       }
     },
-    "owner": "anik_dev"
+    "owner": "anik_dev",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/3d7ae686-6a2f-42cc-b075-bf925ec7e0be"
+    }
   }
 }

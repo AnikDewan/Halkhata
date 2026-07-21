@@ -1,4 +1,3 @@
-import { ActionFab } from "@/components/action-fab";
 import { AppHeader } from "@/components/app-header";
 import { db } from "@/db/db";
 import { customers, transactions } from "@/db/schema";
@@ -11,10 +10,7 @@ import { useLiveQuery } from "drizzle-orm/expo-sqlite";
 import { Link, useRouter } from "expo-router";
 import { ArrowDown, ArrowUp, Inbox } from "lucide-react-native";
 import { Pressable, Text, View } from "react-native";
-import Animated, {
-  FadeInDown,
-  LinearTransition,
-} from "react-native-reanimated";
+import Animated, { FadeInDown } from "react-native-reanimated";
 
 export default function HomeDashboard() {
   const router = useRouter();
@@ -170,18 +166,14 @@ export default function HomeDashboard() {
               <FlashList
                 data={recentTransactions}
                 keyExtractor={(item) => String(item.id)}
-                renderItem={({ item, index }) => (
-                  <Animated.View
-                    entering={FadeInDown.duration(400).delay(100 + index * 50)}
-                    layout={LinearTransition.springify()}
+                renderItem={({ item }) => (
+                  <Pressable
+                    onPress={() =>
+                      router.push(`/customer/${item.customerId}` as any)
+                    }
+                    className="flex-row justify-between items-center bg-card border border-border rounded-2xl mb-2.5 overflow-hidden active:bg-border shadow-xs"
+                    style={{ borderCurve: "continuous" }}
                   >
-                    <Pressable
-                      onPress={() =>
-                        router.push(`/customer/${item.customerId}` as any)
-                      }
-                      className="flex-row justify-between items-center bg-card border border-border rounded-2xl mb-2.5 overflow-hidden active:bg-border shadow-xs"
-                      style={{ borderCurve: "continuous" }}
-                    >
                       {/* Visual left colored strip matching transaction type */}
                       <View
                         className={cn(
@@ -232,15 +224,13 @@ export default function HomeDashboard() {
                           {formatDate(item.createdAt)}
                         </Text>
                       </View>
-                    </Pressable>
-                  </Animated.View>
+                  </Pressable>
                 )}
               />
             </View>
           )}
         </View>
       </View>
-      <ActionFab onPress={() => router.push("/customer/add")} />
     </View>
   );
 }

@@ -40,3 +40,15 @@ export function formatDate(timestamp: number): string {
   const year = date.getFullYear();
   return `${day} ${month} ${year}`;
 }
+
+/** Format a local date and time for activity records such as backups. */
+export function formatDateTime(timestamp: number): string {
+  const date = new Date(timestamp);
+  const time = new Intl.DateTimeFormat("en-IN", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  }).format(date);
+
+  return `${formatDate(timestamp)} · ${time}`;
+}

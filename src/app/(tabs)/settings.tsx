@@ -1,4 +1,3 @@
-import { ActionFab } from "@/components/action-fab";
 import { useAppAlert } from "@/components/app-alert";
 import { AppHeader } from "@/components/app-header";
 import { db } from "@/db/db";
@@ -417,8 +416,6 @@ export default function SettingsScreen() {
           </View>
         </Animated.View>
       </ScrollView>
-
-      <ActionFab onPress={handleImportData} />
 
       {busy && (
         <View className="absolute inset-0 items-center justify-center bg-black/25">

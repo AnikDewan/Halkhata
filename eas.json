@@ -5,7 +5,8 @@
   },
   "build": {
     "base": {
-      "node": "24.18.0"
+      "node": "24.18.0",
+      "channel": "base"
     },
     "development": {
       "extends": "base",
@@ -16,7 +17,8 @@
       },
       "ios": {
         "simulator": true
-      }
+      },
+      "channel": "development"
     },
     "preview": {
       "extends": "base",
@@ -38,7 +40,8 @@
       "extends": "production",
       "android": {
         "buildType": "apk"
-      }
+      },
+      "channel": "production-apk"
     }
   },
   "submit": {

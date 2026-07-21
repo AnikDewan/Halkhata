@@ -16,11 +16,6 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { ChevronRight, Receipt, Share2, Trash2, X } from "lucide-react-native";
 import { useState } from "react";
 import { Modal, Pressable, Text, View } from "react-native";
-import Animated, {
-  FadeInDown,
-  FadeOut,
-  LinearTransition,
-} from "react-native-reanimated";
 
 interface InvoiceItem {
   id: string;
@@ -272,15 +267,10 @@ export default function BillingScreen() {
               data={items}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
-                <Animated.View
-                  entering={FadeInDown.duration(300)}
-                  exiting={FadeOut.duration(200)}
-                  layout={LinearTransition.springify()}
+                <View
+                  className="flex-row justify-between items-center bg-card border border-border p-3.5 rounded-2xl mb-2 shadow-xs"
+                  style={{ borderCurve: "continuous" }}
                 >
-                  <View
-                    className="flex-row justify-between items-center bg-card border border-border p-3.5 rounded-2xl mb-2 shadow-xs"
-                    style={{ borderCurve: "continuous" }}
-                  >
                     <View className="flex-1 pr-2">
                       <Text className="text-foreground font-bold text-xs">
                         {item.name}
@@ -303,8 +293,7 @@ export default function BillingScreen() {
                         <Trash2 size={13} color={c.danger} />
                       </Pressable>
                     </View>
-                  </View>
-                </Animated.View>
+                </View>
               )}
             />
           </View>
@@ -402,12 +391,8 @@ export default function BillingScreen() {
               <FlashList
                 data={filteredCustomers}
                 keyExtractor={(item) => String(item.id)}
-                renderItem={({ item, index }) => (
-                  <Animated.View
-                    entering={FadeInDown.duration(300).delay(index * 15)}
-                    layout={LinearTransition.springify()}
-                  >
-                    <Pressable
+                renderItem={({ item }) => (
+                  <Pressable
                       onPress={() => handleSaveToLedger(item.id, item.name)}
                       className="flex-row justify-between items-center bg-card border border-border p-4 rounded-2xl mb-2.5 active:bg-border shadow-xs"
                       style={{ borderCurve: "continuous" }}
@@ -423,8 +408,7 @@ export default function BillingScreen() {
                         )}
                       </View>
                       <ChevronRight size={16} color={c.primary} />
-                    </Pressable>
-                  </Animated.View>
+                  </Pressable>
                 )}
               />
             </View>

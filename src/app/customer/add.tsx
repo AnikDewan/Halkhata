@@ -3,6 +3,7 @@ import { AppHeader } from "@/components/app-header";
 import { FormField } from "@/components/form-field";
 import { db } from "@/db/db";
 import { customers } from "@/db/schema";
+import { isDuplicateCustomerNameError } from "@/lib/customer-name";
 import { WHITE } from "@/lib/theme";
 import { useRouter } from "expo-router";
 import { Contact } from "lucide-react-native";
@@ -31,7 +32,14 @@ export default function AddCustomerScreen() {
       });
       router.back();
     } catch (e: any) {
-      alert("Error", "Failed to save customer: " + e.message);
+      if (isDuplicateCustomerNameError(e)) {
+        alert(
+          "Customer already exists",
+          `A customer named “${name.trim()}” already exists. Use a different name.`,
+        );
+      } else {
+        alert("Error", "Failed to save customer: " + e.message);
+      }
     } finally {
       setSaving(false);
     }

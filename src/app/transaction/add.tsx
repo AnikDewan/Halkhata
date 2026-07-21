@@ -17,7 +17,6 @@ import { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import Animated, {
   FadeInDown,
-  LinearTransition,
 } from "react-native-reanimated";
 
 export default function AddTransactionScreen() {
@@ -138,14 +137,8 @@ export default function AddTransactionScreen() {
               data={filteredCustomers}
               keyExtractor={(item) => String(item.id)}
               keyboardShouldPersistTaps="handled"
-              renderItem={({ item, index }) => (
-                <Animated.View
-                  entering={FadeInDown.duration(280).delay(
-                    Math.min(index, 12) * 15,
-                  )}
-                  layout={LinearTransition.springify()}
-                >
-                  <Pressable
+              renderItem={({ item }) => (
+                <Pressable
                     onPress={() => setCustomerId(item.id)}
                     className="flex-row justify-between items-center bg-card border border-border p-4 rounded-2xl mb-2.5 active:bg-border shadow-xs"
                     style={{ borderCurve: "continuous" }}
@@ -161,8 +154,7 @@ export default function AddTransactionScreen() {
                       )}
                     </View>
                     <ChevronRight size={16} color={c.primary} />
-                  </Pressable>
-                </Animated.View>
+                </Pressable>
               )}
             />
           </View>

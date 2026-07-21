@@ -3,6 +3,7 @@ import { AppHeader } from "@/components/app-header";
 import { SearchField } from "@/components/search-field";
 import { db } from "@/db/db";
 import { customers } from "@/db/schema";
+import { isDuplicateCustomerNameError } from "@/lib/customer-name";
 import { matchesSearch } from "@/lib/search";
 import { useThemeColors, WHITE } from "@/lib/theme";
 import { FlashList } from "@shopify/flash-list";
@@ -17,10 +18,6 @@ import { useRouter } from "expo-router";
 import { AlertCircle, UserCheck } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Pressable, Text, View } from "react-native";
-import Animated, {
-  FadeInDown,
-  LinearTransition,
-} from "react-native-reanimated";
 
 const CONTACT_FIELDS = [ContactField.FULL_NAME, ContactField.PHONES] as const;
 
@@ -121,7 +118,14 @@ export default function ImportContactsScreen() {
       });
       router.back();
     } catch (e: any) {
-      alert("Error", "Failed to save contact: " + e.message);
+      if (isDuplicateCustomerNameError(e)) {
+        alert(
+          "Customer already exists",
+          `A customer named “${name}” already exists.`,
+        );
+      } else {
+        alert("Error", "Failed to save contact: " + e.message);
+      }
     } finally {
       setImportingId(null);
     }
@@ -171,19 +175,13 @@ export default function ImportContactsScreen() {
             data={filtered}
             keyExtractor={(item) => item.id}
             keyboardShouldPersistTaps="handled"
-            renderItem={({ item, index }) => (
-              <Animated.View
-                entering={FadeInDown.duration(280).delay(
-                  Math.min(index, 12) * 15,
-                )}
-                layout={LinearTransition.springify()}
+            renderItem={({ item }) => (
+              <Pressable
+                onPress={() => handleSelect(item)}
+                disabled={importingId === item.id}
+                className="flex-row justify-between items-center bg-card border border-border p-4 rounded-2xl mb-2 active:bg-border shadow-xs disabled:opacity-60"
+                style={{ borderCurve: "continuous" }}
               >
-                <Pressable
-                  onPress={() => handleSelect(item)}
-                  disabled={importingId === item.id}
-                  className="flex-row justify-between items-center bg-card border border-border p-4 rounded-2xl mb-2 active:bg-border shadow-xs disabled:opacity-60"
-                  style={{ borderCurve: "continuous" }}
-                >
                   <View className="flex-1 pr-3">
                     <Text className="text-foreground font-bold text-sm">
                       {item.fullName}
@@ -201,8 +199,7 @@ export default function ImportContactsScreen() {
                       <UserCheck size={14} color={WHITE} />
                     )}
                   </View>
-                </Pressable>
-              </Animated.View>
+              </Pressable>
             )}
           />
         </View>

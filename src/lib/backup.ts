@@ -3,7 +3,7 @@ import {
   importLedgerJson,
   type LedgerExport,
 } from "@/lib/data-transfer";
-import { formatDate } from "@/lib/format";
+import { formatDateTime } from "@/lib/format";
 import * as DocumentPicker from "expo-document-picker";
 import { Directory, File, Paths } from "expo-file-system";
 import {
@@ -88,6 +88,23 @@ function stampId(date = new Date()): string {
   const min = String(date.getMinutes()).padStart(2, "0");
   const s = String(date.getSeconds()).padStart(2, "0");
   return `${day}_${h}${min}${s}`;
+}
+
+function createdAtFromBackupId(id: string, fallbackDayKey: string): string {
+  const match = id.match(/(\d{4})-(\d{2})-(\d{2})_(\d{2})(\d{2})(\d{2})$/);
+  if (!match) {
+    return new Date(`${fallbackDayKey}T12:00:00`).toISOString();
+  }
+
+  const [, year, month, day, hour, minute, second] = match;
+  return new Date(
+    Number(year),
+    Number(month) - 1,
+    Number(day),
+    Number(hour),
+    Number(minute),
+    Number(second),
+  ).toISOString();
 }
 
 function isSafUri(uri: string): boolean {
@@ -616,7 +633,7 @@ async function reconcileManifestFromDisk(
     const entry: BackupEntry = {
       id,
       fileName,
-      createdAt: new Date(`${dayKey}T12:00:00`).toISOString(),
+      createdAt: createdAtFromBackupId(id, dayKey),
       dayKey,
       customerCount,
       transactionCount,
@@ -967,7 +984,7 @@ export async function getBackupStatus(): Promise<BackupStatus> {
 }
 
 export function formatBackupLabel(entry: BackupEntry): string {
-  const when = formatDate(Date.parse(entry.createdAt));
+  const when = formatDateTime(Date.parse(entry.createdAt));
   if (entry.kind === "pre-clear") {
     return `Previous data · ${when}`;
   }

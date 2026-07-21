@@ -14,11 +14,7 @@ import { useRouter } from "expo-router";
 import { ArrowDown, ArrowUp, FileSpreadsheet } from "lucide-react-native";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
-import Animated, {
-  FadeIn,
-  FadeInDown,
-  LinearTransition,
-} from "react-native-reanimated";
+import Animated, { FadeIn } from "react-native-reanimated";
 
 type FilterType = "all" | "given" | "received";
 type TimeFilter = "all" | "today" | "week" | "month";
@@ -180,18 +176,14 @@ export default function TransactionsFeedScreen() {
             <FlashList
               data={filteredTransactions}
               keyExtractor={(item) => String(item.id)}
-              renderItem={({ item, index }) => (
-                <Animated.View
-                  entering={FadeInDown.duration(350).delay(index * 25)}
-                  layout={LinearTransition.springify()}
+              renderItem={({ item }) => (
+                <Pressable
+                  onPress={() =>
+                    router.push(`/customer/${item.customerId}` as any)
+                  }
+                  className="flex-row justify-between items-center bg-card border border-border rounded-2xl mb-2.5 overflow-hidden active:bg-border shadow-xs"
+                  style={{ borderCurve: "continuous" }}
                 >
-                  <Pressable
-                    onPress={() =>
-                      router.push(`/customer/${item.customerId}` as any)
-                    }
-                    className="flex-row justify-between items-center bg-card border border-border rounded-2xl mb-2.5 overflow-hidden active:bg-border shadow-xs"
-                    style={{ borderCurve: "continuous" }}
-                  >
                     <View
                       className={cn(
                         "w-1.5 h-16",
@@ -239,8 +231,7 @@ export default function TransactionsFeedScreen() {
                         {formatDate(item.createdAt)}
                       </Text>
                     </View>
-                  </Pressable>
-                </Animated.View>
+                </Pressable>
               )}
             />
           </View>
