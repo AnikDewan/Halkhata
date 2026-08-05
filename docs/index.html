@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HalKhata — Offline Digital Ledger App</title>
+  <meta
+    name="description"
+    content="HalKhata is a fully offline, open-source digital ledger app for tracking business transactions and personal expenses. Zero data collection, no internet required, completely transparent code."
+  />
+  <meta name="theme-color" content="#ee161f" />
+  <meta property="og:title" content="HalKhata — Your Digital Ledger. 100% Offline. 100% Open Source." />
+  <meta
+    property="og:description"
+    content="Track business transactions and personal expenses safely. Zero data collection, no internet required, completely transparent code. Your financial records stay on your device."
+  />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+        <a class="wordmark" href="#top">
+          <img class="wordmark__logo" src="logo.png" alt="HalKhata logo" width="32" height="32" />
+          HalKhata
+        </a>
+
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="nav-panel"
+      >
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="sr-only">Toggle menu</span>
+      </button>
+
+      <nav class="nav" id="nav-panel" aria-label="Primary">
+        <ul class="nav__links">
+          <li><a class="nav__link" href="#features">Features</a></li>
+          <li><a class="nav__link" href="#privacy">Privacy Policy</a></li>
+          <li><a class="nav__link" href="#support">Support</a></li>
+        </ul>
+        <div class="nav__actions">
+          <a data-apk class="btn btn--primary btn--small" href="#">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download APK
+          </a>
+          <a data-github class="btn btn--icon btn--dark" href="#" aria-label="View source code on GitHub">
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.8-.01 3.18 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">The shopkeeper's ledger · now on your phone</p>
+          <h1 class="hero__title" id="hero-title">
+            HalKhata: Your Digital Ledger.<br />
+            <span class="hero__title-accent">100% Offline. 100% Open Source.</span>
+          </h1>
+          <p class="hero__lede">
+            Track your business transactions and personal expenses safely. Zero data
+            collection, no internet required, and completely transparent code. Your
+            financial records stay on your device.
+          </p>
+          <div class="hero__actions">
+            <a data-apk class="btn btn--primary" href="#">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Android APK
+            </a>
+            <a data-github class="btn btn--icon btn--ghost" href="#" aria-label="View source code on GitHub">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.8-.01 3.18 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            </a>
+          </div>
+          <ul class="hero__trust" aria-label="HalKhata guarantees">
+            <li>MIT Licensed</li>
+            <li>No accounts</li>
+            <li>No servers</li>
+            <li>No tracking</li>
+          </ul>
+        </div>
+
+        <!-- The live khata — the page's one memorable element -->
+        <div class="khata-wrap">
+          <div class="khata" role="group" aria-label="Interactive demo of the HalKhata ledger">
+            <div class="khata__head">
+              <div class="khata__ledger">
+                <span class="khata__ledger-name">Sunita General Store</span>
+                <span class="khata__ledger-no">Ledger № 042 · 02 Aug 2026</span>
+              </div>
+              <div class="khata__total" id="khata-status">
+                <span class="khata__total-label">To receive</span>
+                <span class="khata__total-amt" id="khata-total">₹0</span>
+              </div>
+            </div>
+            <div class="khata__sheet">
+              <div class="khata__cols" aria-hidden="true">
+                <span>Entry</span><span>Amount</span>
+              </div>
+              <div class="khata__rows" id="khata-rows"></div>
+            </div>
+            <div class="khata__controls">
+              <button class="btn btn--ghost btn--small" id="khata-credit" type="button">+ Record a credit</button>
+              <button class="btn btn--ghost btn--small btn--green" id="khata-payment" type="button">− Record a payment</button>
+              <button class="khata__new" id="khata-new" type="button">New book</button>
+            </div>
+          </div>
+          <p class="khata__caption">
+            <span class="khata__caption-dot" aria-hidden="true"></span>
+            Written once, kept on your phone. Entries never leave this book.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="section" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow">The HalKhata promise</p>
+          <h2 class="section__title" id="features-title">Your ledger lives on your phone. Nowhere else.</h2>
+        </header>
+
+        <div class="features">
+          <article class="card">
+            <div class="card__icon" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <h3 class="card__title">Total Data Privacy</h3>
+            <p class="card__body">
+              HalKhata never collects, tracks, or shares anything. There is no server
+              to phone home to — nothing to sell, nothing to leak.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card__icon" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3 class="card__title">Open Source Transparency</h3>
+            <p class="card__body">
+              Every line of code is public and auditable. Anyone can verify exactly what
+              the app does — and just as importantly, what it does not do.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card__icon" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3 class="card__title">Secure Local Storage</h3>
+            <p class="card__body">
+              All ledger entries are saved only in your phone's secure local storage.
+              Uninstall the app and the data goes with it — not to the cloud.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card__icon" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.58 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+            </div>
+            <h3 class="card__title">Fully Offline Utility</h3>
+            <p class="card__body">
+              Manage your khata, credits, and payments anywhere — the market, the train,
+              a village with no signal. No internet connection required, ever.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============ PRIVACY POLICY ============ -->
+    <section class="section section--privacy" id="privacy" aria-labelledby="privacy-title">
+      <div class="container">
+        <div class="privacy">
+          <header class="privacy__head">
+            <p class="eyebrow">For app stores &amp; auditors</p>
+            <h2 class="section__title" id="privacy-title">Privacy Policy</h2>
+            <p class="privacy__updated">Last updated: August 2, 2026</p>
+          </header>
+
+          <div class="privacy__body">
+            <p>
+              HalKhata is built as an open-source, commercial app. This service is
+              provided at no cost and is intended for use as is.
+            </p>
+
+            <ol class="policy">
+              <li class="policy__item">
+                <h3 class="policy__title">1. Data Collection and Use</h3>
+                <p>
+                  We respect your privacy. HalKhata does not collect, store, or transmit
+                  any personal information, phone contacts, business transactions, or
+                  financial data to external servers. The app operates 100% offline. All
+                  digital ledger entries you record are processed and stored strictly on
+                  your own device's secure local storage.
+                </p>
+              </li>
+              <li class="policy__item">
+                <h3 class="policy__title">2. Account Deletion</h3>
+                <p>
+                  Because HalKhata does not create user accounts, require logins, or
+                  store information on clouds or external databases, there is no user
+                  data or account to delete from our end. Uninstalling the app from your
+                  device permanently deletes all local ledger data.
+                </p>
+              </li>
+              <li class="policy__item">
+                <h3 class="policy__title">3. Device Permissions</h3>
+                <p>
+                  The app may request local storage or backup permissions solely to save
+                  your ledger data safely on your phone. This data is never shared with
+                  the developer or any third party.
+                </p>
+              </li>
+              <li class="policy__item">
+                <h3 class="policy__title">4. Changes to This Policy</h3>
+                <p>
+                  We may update our Privacy Policy from time to time. You are advised to
+                  review this page periodically for any changes.
+                </p>
+              </li>
+              <li class="policy__item">
+                <h3 class="policy__title">5. Contact Us</h3>
+                <p>
+                  For app support, feature suggestions, or questions regarding this
+                  Privacy Policy, please contact us at:
+                  <a class="policy__email" href="mailto:anikdeveloper0@gmail.com">anikdeveloper0@gmail.com</a>
+                </p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER / SUPPORT ============ -->
+  <footer class="site-footer" id="support">
+    <div class="container">
+      <div class="site-footer__top">
+        <div class="site-footer__brand">
+          <a class="wordmark wordmark--light" href="#top">
+            <img class="wordmark__logo" src="logo.png" alt="HalKhata logo" width="32" height="32" />
+            HalKhata
+          </a>
+          <p class="site-footer__tagline">
+            The offline, open-source ledger for your shop and your home.
+          </p>
+        </div>
+        <div class="support">
+          <h2 class="support__title">Need help or have feedback?</h2>
+          <p class="support__text">
+            Contact Support at
+            <a class="support__email" href="mailto:anikdeveloper0@gmail.com">anikdeveloper0@gmail.com</a>
+          </p>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <p class="site-footer__legal">
+          © 2026 HalKhata. All rights reserved. Open source under the MIT License.
+        </p>
+        <a data-github class="site-footer__github" href="#">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.8-.01 3.18 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          Source on GitHub
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
